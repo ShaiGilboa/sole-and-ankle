@@ -1,9 +1,10 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { COLORS, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
+import { COLORS, WEIGHTS } from "../../constants";
+import Logo from "../Logo";
+import Spacer from "../Spacer";
+import SuperHeader from "../SuperHeader";
 
 const Header = () => {
   // Our site features two visual headers, but they should be
@@ -13,6 +14,7 @@ const Header = () => {
       <SuperHeader />
       <MainHeader>
         <Logo />
+        <StyledSpacer axis="horizontal" size={48} flexGrow={1} />
         <Nav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
@@ -21,17 +23,27 @@ const Header = () => {
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
+        <StyledSpacer axis="horizontal" size={0} flexGrow={2} />
       </MainHeader>
     </header>
   );
 };
 
 const MainHeader = styled.div`
-  padding: 0 32px;
+  padding: 24px 32px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  display: flex;
+  align-items: baseline;
 `;
 
-const Nav = styled.nav``;
+const StyledSpacer = styled(Spacer)`
+  flex-grow: ${p => p.flexGrow || 1};
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  gap: 48px;
+`;
 
 const NavLink = styled.a`
   font-size: 1.125rem;

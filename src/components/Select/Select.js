@@ -45,7 +45,7 @@ const Wrapper = styled.label`
       return `
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: baseline;
       gap: 16px;
     `;
     }

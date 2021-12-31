@@ -13,8 +13,10 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <Logo />
-        <StyledSpacer axis="horizontal" size={48} flexGrow={1} />
+        <Side>
+          <Logo />
+        </Side>
+
         <Nav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
@@ -23,26 +25,30 @@ const Header = () => {
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
-        <StyledSpacer axis="horizontal" size={0} flexGrow={2} />
+
+        <Side />
       </MainHeader>
     </header>
   );
 };
 
 const MainHeader = styled.div`
-  padding: 24px 32px;
+  padding: 0 32px;
+  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
   display: flex;
   align-items: baseline;
 `;
 
-const StyledSpacer = styled(Spacer)`
-  flex-grow: ${p => p.flexGrow || 1};
+const Side = styled.div`
+  flex: 1;
+  margin: auto;
 `;
 
 const Nav = styled.nav`
   display: flex;
   gap: 48px;
+  margin: auto 48px;
 `;
 
 const NavLink = styled.a`

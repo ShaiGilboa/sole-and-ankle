@@ -78,17 +78,32 @@ const ShoeCard = ({
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
-          <StyledTag style={{ "--color": style.color }}>{style.text}</StyledTag>
+          {variant !== SHOE_VARIANTS.Default ? (
+            <StyledTag style={{ "--background-color": style.color }}>
+              {style.text}
+            </StyledTag>
+          ) : null}
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price sale={!!salePrice}>{formatPrice(price)}</Price>
+          <Price
+            style={{
+              "--color":
+                variant === SHOE_VARIANTS.OnSale ? COLORS.gray[700] : undefined,
+              "--text-decoration":
+                variant === SHOE_VARIANTS.OnSale ? "line-through" : undefined,
+            }}
+          >
+            {formatPrice(price)}
+          </Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize("Color", numOfColors)}</ColorInfo>
-          {salePrice ? <SalePrice>{formatPrice(salePrice)}</SalePrice> : null}
+          {variant === SHOE_VARIANTS.OnSale ? (
+            <SalePrice>{formatPrice(salePrice)}</SalePrice>
+          ) : null}
         </Row>
       </Wrapper>
     </Link>
@@ -112,10 +127,12 @@ const StyledTag = styled.span`
   position: absolute;
   top: 12px;
   right: -4px;
-  padding: 8px;
-  background-color: var(--color);
-  color: white;
+  padding: 10px;
+  background-color: var(--background-color);
+  color: ${COLORS.white};
   border-radius: 2px;
+  font-size: ${14 / 18}rem;
+  font-weight: ${WEIGHTS.bold};
 `;
 
 const Image = styled.img`
@@ -134,8 +151,8 @@ const Name = styled.h3`
 `;
 
 const Price = styled.span`
-  text-decoration: ${({ sale }) => (sale ? "line-through" : "none")};
-  color: ${({ sale }) => (sale ? COLORS.gray[700] : COLORS.gray[900])};
+  text-decoration: var(--text-decoration);
+  color: var(--color);
 `;
 
 const ColorInfo = styled.p`
